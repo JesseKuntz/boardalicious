@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { getCollection, Game } from "~api";
 import { Button } from "~app/components";

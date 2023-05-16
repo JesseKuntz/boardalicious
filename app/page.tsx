@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <div className="text-center space-y-12">
       <h1 className="text-3xl font-semibold">
-        {"Hungry for a board game but can't decide which one to play?"}
+        {"Hungry for a board game but can't decide what to play?"}
       </h1>
       <div className="w-full flex justify-center">
         <Logo />
