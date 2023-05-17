@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getCollection, Game } from "~api";
+import { useUsername } from "~hooks";
 import { Button } from "~app/components";
 import { GameCard } from "./components";
 
@@ -19,7 +20,16 @@ export const CollectionForm: React.FC = () => {
     () => getCollection({ username }),
     { enabled: false }
   );
-  const queryClient = useQueryClient();
+  const { username: savedUsername, setUsername: setSavedUsername } =
+    useUsername();
+
+  useEffect(() => {
+    if (savedUsername && !username) {
+      setUsername(savedUsername);
+    } else if (savedUsername && username) {
+      refetch();
+    }
+  }, [savedUsername, username, refetch]);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -28,28 +38,36 @@ export const CollectionForm: React.FC = () => {
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await queryClient.invalidateQueries({ queryKey: ["collection", username] });
+    const response = await refetch();
 
-    refetch();
+    if (response.isSuccess) {
+      setSavedUsername(username);
+    }
   };
 
   return (
-    <div className="space-y-12">
-      <h1 className="text-2xl font-semibold">Fetch Your Collection:</h1>
-      <form onSubmit={handleFormSubmit} className="mt-4">
-        <div className="flex items-center flex-wrap gap-4">
-          <input
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-            placeholder="Enter your username"
-            className="px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-          />
-          <Button type="submit" disabled={!username}>
-            Fetch Collection
-          </Button>
-        </div>
-      </form>
+    <div className="space-y-4">
+      {savedUsername ? (
+        <h1 className="text-2xl">Username: {savedUsername}</h1>
+      ) : (
+        <>
+          <h1 className="text-2xl">Fetch Your Collection:</h1>
+          <form onSubmit={handleFormSubmit} className="mt-4">
+            <div className="flex items-center flex-wrap gap-4">
+              <input
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+                placeholder="Enter your username"
+                className="px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              />
+              <Button type="submit" disabled={!username}>
+                Fetch Collection
+              </Button>
+            </div>
+          </form>
+        </>
+      )}
       {(isInitialLoading || isRefetching) && <p>Loading...</p>}
       {isError && <p>Oh no! Something bad happened. Please try again.</p>}
       {collection && (
