@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.className} bg-gray-800 text-white text-lg`}
+        className={`${robotoMono.className} bg-gray-800 bg-[url('/wavey-fingerprint.svg')] text-white text-lg`}
       >
         <Menu />
         <main className="px-4 md:px-12 py-12 ">
