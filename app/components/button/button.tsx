@@ -1,11 +1,29 @@
+import { twMerge as tw } from "tailwind-merge";
+
+type Palette = "primary" | "secondary";
+
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
+  palette?: Palette;
+  classNameOverride?: string;
 };
 
-export const Button: React.FC<Props> = ({ children, ...props }) => {
+export const Button: React.FC<Props> = ({
+  children,
+  palette = "primary",
+  classNameOverride,
+  ...props
+}) => {
+  const paletteStyles: { [key in Palette]: string } = {
+    primary: "bg-teal-700 hover:bg-teal-900",
+    secondary: "bg-transparent hover:bg-slate-900 px-2",
+  };
+  const baseStyles =
+    "text-xl py-2 px-6 transition-all duration-200 rounded disabled:bg-gray-500 disabled:cursor-not-allowed";
+
   return (
     <button
-      className="text-xl py-2 px-6 transition-all duration-200 bg-teal-700 rounded hover:bg-teal-900 disabled:bg-gray-500 disabled:cursor-not-allowed"
+      className={tw(baseStyles, paletteStyles[palette], classNameOverride)}
       {...props}
     >
       {children}

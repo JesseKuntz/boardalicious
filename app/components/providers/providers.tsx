@@ -8,7 +8,10 @@ type Props = {
 };
 
 export const Providers: React.FC<Props> = ({ children }) => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({ defaultOptions: { queries: { staleTime: Infinity } } })
+  );
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

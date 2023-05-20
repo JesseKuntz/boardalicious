@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Button } from "../button";
 
 const menuItems = [
   {
@@ -24,7 +25,7 @@ export const Menu: React.FC = () => {
   return (
     <nav className="backdrop-blur-md border-b border-b-gray-700 sticky top-0 py-6">
       <div className="flex items-center justify-between px-4 md:px-12">
-        <div className="flex items-center">
+        <div className="flex items-center" onClick={() => setIsNavOpen(false)}>
           <Link href="/">
             <span className="text-xl font-semibold text-white">
               Boardalicious
@@ -45,9 +46,9 @@ export const Menu: React.FC = () => {
           </ul>
         </div>
         <div className="md:hidden">
-          <button
+          <Button
             onClick={handleNavToggle}
-            className="inline-flex items-center justify-center p-2 text-white transition duration-200 rounded hover:bg-gray-900"
+            palette="secondary"
             aria-label="Menu"
             aria-expanded={isNavOpen}
           >
@@ -82,7 +83,7 @@ export const Menu: React.FC = () => {
                 />
               </svg>
             )}
-          </button>
+          </Button>
         </div>
       </div>
       {isNavOpen && (
@@ -91,9 +92,12 @@ export const Menu: React.FC = () => {
             {menuItems.map(({ title, href }) => (
               <li key={title} onClick={() => setIsNavOpen(false)}>
                 <Link href={href}>
-                  <span className="block px-2 py-2 rounded-md hover:bg-gray-900">
+                  <Button
+                    palette="secondary"
+                    classNameOverride="block w-full text-left"
+                  >
                     {title}
-                  </span>
+                  </Button>
                 </Link>
               </li>
             ))}
