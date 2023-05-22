@@ -8,6 +8,10 @@ import { Button } from "..";
 export const Username: React.FC = () => {
   const [username, setUsername] = useLocalStorage(USERNAME_STORAGE_KEY, "");
 
+  if (!username) {
+    return null;
+  }
+
   return (
     <div className="flex gap-4">
       <h1 className="text-2xl flex items-center gap-2">

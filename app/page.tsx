@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { routes } from "~utils";
 import { Button, Logo } from "./components";
 
 const HomePage = () => {
@@ -16,7 +17,7 @@ const HomePage = () => {
         }
       </p>
       <div>
-        <Link href="/collection" passHref>
+        <Link href={routes.feedMe} passHref>
           <Button>{"Let's Play!"}</Button>
         </Link>
       </div>

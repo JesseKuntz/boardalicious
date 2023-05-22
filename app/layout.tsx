@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Roboto_Mono } from "next/font/google";
-
 import { Providers, Menu } from "./components";
 
 const robotoMono = Roboto_Mono({ weight: "400", subsets: ["latin"] });

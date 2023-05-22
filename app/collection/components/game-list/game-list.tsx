@@ -11,7 +11,7 @@ export const GameList: React.FC<Props> = ({ collection }) => {
   }
 
   return (
-    <div className="mt-8">
+    <div className="pt-8">
       <ul className="flex flex-wrap gap-4">
         {collection.map((game) => (
           <GameCard key={game.name.text} game={game} />

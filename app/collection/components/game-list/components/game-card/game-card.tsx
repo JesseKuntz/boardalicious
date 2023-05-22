@@ -2,12 +2,16 @@ import Image from "next/image";
 import { Game } from "~api";
 
 type Props = {
-  game: Game;
+  game?: Game;
 };
 
 export const GameCard: React.FC<Props> = ({ game }) => {
+  if (!game) {
+    return null;
+  }
+
   return (
-    <li key={game.name.text} className="flex items-center space-x-4">
+    <li key={game.name.text} className="flex items-center space-x-4 text-left">
       <Image
         src={game.image.text}
         alt={game.name.text}

@@ -2,16 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "../button";
+import { routes } from "~utils";
+import { Button } from "..";
 
 const menuItems = [
   {
     title: "Home",
-    href: "/",
+    href: routes.home,
+  },
+  {
+    title: "Feed Me",
+    href: routes.feedMe,
   },
   {
     title: "Collection",
-    href: "/collection",
+    href: routes.collection,
   },
 ];
 

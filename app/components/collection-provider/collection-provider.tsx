@@ -1,19 +1,25 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "usehooks-ts";
 import { getCollection, Game } from "~api";
 import { USERNAME_STORAGE_KEY } from "~utils";
-import { Button, Username } from "~app/components";
-import { GameList } from "../game-list";
+import { Button, Username, Logo } from "~app/components";
 
-export const CollectionForm: React.FC = () => {
+type Props = {
+  children: JSX.Element;
+};
+
+export const CollectionProvider: React.FC<Props> = ({ children }) => {
   const [username, setUsername] = useLocalStorage(USERNAME_STORAGE_KEY, "");
   const [usernameInputValue, setUsernameInputValue] = useState("");
-  const { data: collection, isError } = useQuery<Game[]>(
-    ["collection", username],
-    () => getCollection({ username })
+  const {
+    data: collection,
+    isLoading,
+    isError,
+  } = useQuery<Game[]>(["collection", username], () =>
+    getCollection({ username })
   );
 
   const handleUsernameInputChange = (
@@ -27,11 +33,15 @@ export const CollectionForm: React.FC = () => {
     setUsername(usernameInputValue);
   };
 
+  const renderChildren = () =>
+    React.Children.map(children, (child) =>
+      React.cloneElement(child, { collection })
+    );
+
   return (
     <div className="space-y-4 flex flex-col items-center">
-      {username ? (
-        <Username />
-      ) : (
+      <Username />
+      {!username && (
         <div>
           <h1 className="text-2xl">Import Your Collection:</h1>
           <form onSubmit={handleFormSubmit} className="mt-4">
@@ -51,8 +61,18 @@ export const CollectionForm: React.FC = () => {
           </form>
         </div>
       )}
-      {isError && <p>Oh no! Something bad happened. Please try again.</p>}
-      <GameList collection={collection} />
+      {isLoading && username && (
+        <div className="pt-12 animate-bounce">
+          <Logo />
+        </div>
+      )}
+      {isError && (
+        <p>
+          Oh no! Something bad happened. Please make sure that your username is
+          correct, and try again.
+        </p>
+      )}
+      {renderChildren()}
     </div>
   );
 };

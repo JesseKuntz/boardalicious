@@ -1,9 +1,14 @@
 "use client";
 
-import { CollectionForm } from "./components";
+import { CollectionProvider } from "~app/components";
+import { GameList } from "./components";
 
 const CollectionPage: React.FC = () => {
-  return <CollectionForm />;
+  return (
+    <CollectionProvider>
+      <GameList />
+    </CollectionProvider>
+  );
 };
 
 export default CollectionPage;

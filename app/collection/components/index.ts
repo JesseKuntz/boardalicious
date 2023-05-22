@@ -1,1 +1,1 @@
-export * from "./collection-form";
+export { GameList } from "./game-list";
