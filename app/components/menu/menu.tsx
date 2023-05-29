@@ -28,7 +28,7 @@ export const Menu: React.FC = () => {
   };
 
   return (
-    <nav className="backdrop-blur-md border-b border-b-gray-700 sticky top-0 py-6">
+    <nav className="backdrop-blur-md border-b border-b-gray-700 sticky top-0 py-6 z-10">
       <div className="flex items-center justify-between px-4 md:px-12">
         <div className="flex items-center" onClick={() => setIsNavOpen(false)}>
           <Link href="/">
