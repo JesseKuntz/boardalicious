@@ -21,6 +21,8 @@ export const GameCard: React.FC<Props> = ({ game }) => {
         className="w-24 border border-slate-500 rounded"
         width={96}
         height={96}
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOsY/jfBwAEjgINT3lokAAAAABJRU5ErkJggg=="
       />
       <div>
         <div>{game.name.text}</div>

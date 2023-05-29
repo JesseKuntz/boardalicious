@@ -40,8 +40,9 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <div className="space-y-4 flex flex-col items-center">
-      <Username />
-      {!username && (
+      {username ? (
+        <Username />
+      ) : (
         <div>
           <h1 className="text-2xl">Import Your Collection:</h1>
           <form onSubmit={handleFormSubmit} className="mt-4">
