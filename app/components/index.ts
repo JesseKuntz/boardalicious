@@ -1,3 +1,5 @@
+"use client";
+
 export { Button } from "./button";
 export { CollectionProvider } from "./collection-provider";
 export { Logo } from "./logo";

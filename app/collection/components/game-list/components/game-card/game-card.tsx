@@ -2,10 +2,11 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Game } from "~api";
 
-const hidden = { y: 20, opacity: 0 };
+const hidden = { opacity: 0, scale: 0 };
 const visible = {
-  y: 0,
   opacity: 1,
+  scale: 1,
+  rotate: 360,
 };
 
 const motionItem = {
@@ -28,6 +29,11 @@ export const GameCard: React.FC<Props> = ({ game }) => {
       animate={visible}
       key={game.name.text}
       variants={motionItem}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+      }}
       className="w-full md:w-60 gap-4 flex md:flex-col items-center md:justify-center md:text-center p-4 backdrop-blur-[2px] border-2 border-slate-700 rounded"
     >
       <Image

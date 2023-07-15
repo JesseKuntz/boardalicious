@@ -24,7 +24,7 @@ export const Randomizer: React.FC<Props> = ({ collection }) => {
   };
 
   return (
-    <div className="pt-8 space-y-4 flex flex-col items-center text-center">
+    <div className="pt-8 space-y-12 flex flex-col items-center text-center">
       <h2>{`We'll pick from your collection of ${Number(
         collection.length
       ).toLocaleString()} games.`}</h2>
