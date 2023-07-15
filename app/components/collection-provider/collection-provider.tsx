@@ -63,7 +63,7 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
         </div>
       )}
       {isLoading && username && (
-        <div className="pt-12 animate-bounce">
+        <div className="pt-12 animate-pulse">
           <Logo />
         </div>
       )}

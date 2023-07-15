@@ -1,5 +1,17 @@
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Game } from "~api";
+
+const hidden = { y: 20, opacity: 0 };
+const visible = {
+  y: 0,
+  opacity: 1,
+};
+
+const motionItem = {
+  hidden,
+  visible,
+};
 
 type Props = {
   game?: Game;
@@ -11,8 +23,11 @@ export const GameCard: React.FC<Props> = ({ game }) => {
   }
 
   return (
-    <li
+    <motion.li
+      initial={hidden}
+      animate={visible}
       key={game.name.text}
+      variants={motionItem}
       className="w-full md:w-60 gap-4 flex md:flex-col items-center md:justify-center md:text-center p-4 backdrop-blur-[2px] border-2 border-slate-700 rounded"
     >
       <Image
@@ -28,6 +43,6 @@ export const GameCard: React.FC<Props> = ({ game }) => {
         <div>{game.name.text}</div>
         <div className="text-slate-400">{game.yearpublished.text}</div>
       </div>
-    </li>
+    </motion.li>
   );
 };
