@@ -17,7 +17,9 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
   const {
     data: collection,
     isLoading,
+    isRefetching,
     isError,
+    refetch,
   } = useQuery<Game[]>(["collection", username], () =>
     getCollection({ username })
   );
@@ -41,7 +43,7 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
   return (
     <div className="space-y-4 flex flex-col items-center">
       {username ? (
-        <Username />
+        <Username refetch={refetch} />
       ) : (
         <div>
           <h1 className="text-2xl">Import Your Collection:</h1>
@@ -62,7 +64,7 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
           </form>
         </div>
       )}
-      {isLoading && username && (
+      {(isLoading || isRefetching) && username && (
         <div className="pt-12 animate-pulse">
           <Logo />
         </div>

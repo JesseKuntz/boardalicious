@@ -1,12 +1,18 @@
 "use client";
 
-import { FiXSquare } from "react-icons/fi";
+import { useState } from "react";
+import { FiXSquare, FiRefreshCcw } from "react-icons/fi";
 import { useLocalStorage } from "usehooks-ts";
 import { USERNAME_STORAGE_KEY } from "~utils";
 import { Button } from "..";
 
-export const Username: React.FC = () => {
+type Props = {
+  refetch: () => void;
+};
+
+export const Username: React.FC<Props> = ({ refetch }) => {
   const [username, setUsername] = useLocalStorage(USERNAME_STORAGE_KEY, "");
+  const [refetchButtonClicked, setRefetchButtonClicked] = useState(false);
 
   if (!username) {
     return null;
@@ -14,7 +20,7 @@ export const Username: React.FC = () => {
 
   return (
     <div className="flex gap-4">
-      <h1 className="text-2xl flex items-center gap-2">
+      <h1 className="text-2xl flex items-center gap-2 flex-wrap">
         Username:
         <span className="flex items-center gap-2 rounded bg-slate-700 px-4 py-1">
           {username}
@@ -22,6 +28,17 @@ export const Username: React.FC = () => {
             <FiXSquare />
           </Button>
         </span>
+        <Button
+          palette="secondary"
+          onClick={() => {
+            refetch();
+            setRefetchButtonClicked(true);
+            setTimeout(() => setRefetchButtonClicked(false), 5000);
+          }}
+          disabled={refetchButtonClicked}
+        >
+          <FiRefreshCcw />
+        </Button>
       </h1>
     </div>
   );
