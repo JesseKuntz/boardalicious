@@ -68,9 +68,10 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
         </div>
       )}
       {isError && (
-        <p>
+        <p className="text-center text-red-300">
           Oh no! Something bad happened. Please make sure that your username is
-          correct, and try again.
+          correct, and try again. If the issue persists, try again in a few
+          minutes (Board Game Geek may be limiting our requests).
         </p>
       )}
       {renderChildren()}
