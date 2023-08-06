@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "usehooks-ts";
+import { FiInfo } from "react-icons/fi";
 import { getCollection, Game } from "~api";
 import { USERNAME_STORAGE_KEY } from "~utils";
-import { Button, Username, Logo } from "~app/components";
+import { Button, Username, Logo, Tooltip } from "~app/components";
 
 type Props = {
   children: JSX.Element;
@@ -62,6 +63,24 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
               </Button>
             </div>
           </form>
+          <div className="flex items-center gap-2 mt-3 text-slate-400">
+            <p>What&apos;s my username?</p>
+            <Tooltip trigger={<FiInfo />}>
+              <p>
+                Enter your Board Game Geek username in the box above in order to
+                import your collection. You can find your username on{" "}
+                <a
+                  className="underline"
+                  href="https://boardgamegeek.com/"
+                  target="_blank"
+                >
+                  https://boardgamegeek.com/
+                </a>{" "}
+                in the navigation bar, at the top of the page (once you are
+                logged in).
+              </p>
+            </Tooltip>
+          </div>
         </div>
       )}
       {(isLoading || isRefetching) && username && (
