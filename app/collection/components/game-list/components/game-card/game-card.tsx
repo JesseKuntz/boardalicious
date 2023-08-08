@@ -34,7 +34,7 @@ export const GameCard: React.FC<Props> = ({ game }) => {
         stiffness: 200,
         damping: 20,
       }}
-      className="w-full md:w-60 gap-4 flex md:flex-col items-center md:justify-center md:text-center p-4 backdrop-blur-[2px] border-2 border-slate-700 rounded"
+      className="w-full gap-4 flex md:flex-col items-center md:justify-center md:text-center p-4 backdrop-blur-[2px] border-2 border-slate-700 rounded"
     >
       <Image
         src={game.image.text}
