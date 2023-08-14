@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "usehooks-ts";
 import { FiInfo } from "react-icons/fi";
@@ -24,6 +24,11 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
   } = useQuery<Game[]>(["collection", username], () =>
     getCollection({ username })
   );
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleUsernameInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -40,6 +45,10 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
     React.Children.map(children, (child) =>
       React.cloneElement(child, { collection })
     );
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="space-y-4 flex flex-col items-center">
