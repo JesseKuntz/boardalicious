@@ -31,7 +31,7 @@ export const GameDetails: React.FC<Props> = ({ game }) => {
       )}
       {gameDetails && (
         <>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <div className="rounded bg-slate-700 py-2 px-4">
               <div className="flex gap-3 items-center">
                 <Tooltip trigger={<FiUsers />}>Players</Tooltip>
