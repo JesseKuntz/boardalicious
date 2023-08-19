@@ -1,12 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { FiUsers, FiClock, FiExternalLink } from "react-icons/fi";
 import { Game, GameDetails as GameDetailsType, getGameDetails } from "~api";
-import { Logo, Tooltip } from "~app/components";
+import { Logo } from "~app/components";
 import { GameImage } from "..";
-import { GameDescription } from "./components";
+import { GameDescription, StatBadge } from "./components";
 
 type Props = {
   game: Game;
+};
+
+const getValue = (min: string, max: string) => {
+  if (min === max) {
+    return min;
+  }
+
+  return `${min} - ${max}`;
 };
 
 export const GameDetails: React.FC<Props> = ({ game }) => {
@@ -33,34 +41,31 @@ export const GameDetails: React.FC<Props> = ({ game }) => {
       {gameDetails && (
         <>
           <div className="flex flex-wrap justify-center gap-4">
-            <div className="rounded bg-slate-700 py-2 px-4">
-              <div className="flex gap-3 items-center">
-                <Tooltip trigger={<FiUsers />}>Players</Tooltip>
-                <span>
-                  {gameDetails.minplayers.attributes.value} -{" "}
-                  {gameDetails.maxplayers.attributes.value}
-                </span>
-              </div>
-            </div>
-            <div className="rounded bg-slate-700 py-2 px-4">
-              <div className="flex gap-3 items-center">
-                <Tooltip trigger={<FiClock />}>Time</Tooltip>
-                <span>
-                  {gameDetails.minplaytime.attributes.value} -{" "}
-                  {gameDetails.maxplaytime.attributes.value} minutes
-                </span>
-              </div>
-            </div>
+            <StatBadge
+              icon={<FiUsers />}
+              tooltipText="Players"
+              value={getValue(
+                gameDetails.minplayers.attributes.value,
+                gameDetails.maxplayers.attributes.value
+              )}
+            />
+            <StatBadge
+              icon={<FiClock />}
+              tooltipText="Time"
+              value={`${getValue(
+                gameDetails.minplaytime.attributes.value,
+                gameDetails.maxplaytime.attributes.value
+              )} minutes`}
+            />
             <a
               href={`https://boardgamegeek.com/boardgame/${gameDetails.attributes.id}`}
               target="_blank"
             >
-              <div className="rounded bg-slate-700 py-2 px-4 hover:bg-slate-600">
-                <div className="flex gap-3 items-center">
-                  <FiExternalLink />
-                  BGG Page
-                </div>
-              </div>
+              <StatBadge
+                icon={<FiClock />}
+                value="BGG Page"
+                className="hover:bg-slate-600"
+              />
             </a>
           </div>
 
