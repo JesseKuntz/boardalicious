@@ -61,7 +61,7 @@ export const GameDetails: React.FC<Props> = ({ game }) => {
               target="_blank"
             >
               <StatBadge
-                icon={<FiClock />}
+                icon={<FiExternalLink />}
                 value="BGG Page"
                 className="hover:bg-slate-600"
               />
