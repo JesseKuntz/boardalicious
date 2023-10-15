@@ -37,7 +37,6 @@ export const GameDetails: React.FC<Props> = ({ game }) => {
           <Logo />
         </div>
       )}
-      {/* TODO: clean this up, too much repetition and handle case when player count and time are same on min and max */}
       {gameDetails && (
         <>
           <div className="flex flex-wrap justify-center gap-4">
