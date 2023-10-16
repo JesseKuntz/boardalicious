@@ -53,9 +53,10 @@ export const Menu: React.FC = () => {
         <div className="md:hidden">
           <Button
             onClick={handleNavToggle}
-            palette="secondary"
+            palette="tertiary"
             aria-label="Menu"
             aria-expanded={isNavOpen}
+            icon
           >
             {isNavOpen ? (
               <svg
@@ -98,7 +99,7 @@ export const Menu: React.FC = () => {
               <li key={title} onClick={() => setIsNavOpen(false)}>
                 <Link href={href}>
                   <Button
-                    palette="secondary"
+                    palette="tertiary"
                     classNameOverride="block w-full text-left"
                   >
                     {title}

@@ -22,23 +22,28 @@ export const Username: React.FC<Props> = ({ refetch }) => {
     <div className="flex gap-4">
       <h1 className="text-2xl flex items-center gap-2 flex-wrap">
         Username:
-        <span className="flex items-center gap-2 rounded bg-slate-700 px-4 py-1">
-          {username}
-          <Button palette="secondary" onClick={() => setUsername("")}>
-            <FiXSquare />
-          </Button>
-        </span>
-        <Button
-          palette="secondary"
-          onClick={() => {
-            refetch();
-            setRefetchButtonClicked(true);
-            setTimeout(() => setRefetchButtonClicked(false), 5000);
-          }}
-          disabled={refetchButtonClicked}
-        >
-          <FiRefreshCcw />
-        </Button>
+        <div className="flex gap-2">
+          <span className="flex items-center gap-2 rounded bg-slate-700 pl-4 pr-1 py-1">
+            {username}
+            <Button palette="tertiary" onClick={() => setUsername("")} icon>
+              <FiXSquare />
+            </Button>
+          </span>
+          <div className="flex items-center">
+            <Button
+              palette="tertiary"
+              onClick={() => {
+                refetch();
+                setRefetchButtonClicked(true);
+                setTimeout(() => setRefetchButtonClicked(false), 5000);
+              }}
+              disabled={refetchButtonClicked}
+              icon
+            >
+              <FiRefreshCcw />
+            </Button>
+          </div>
+        </div>
       </h1>
     </div>
   );

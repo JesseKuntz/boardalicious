@@ -1,32 +1,49 @@
 import { twMerge as tw } from "tailwind-merge";
 
-type Palette = "primary" | "secondary";
+type Palette = "primary" | "secondary" | "tertiary";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
   palette?: Palette;
+  icon?: boolean;
+  as?: keyof JSX.IntrinsicElements;
   classNameOverride?: string;
 };
 
-export const paletteStyles: { [key in Palette]: string } = {
+const paletteStyles: { [key in Palette]: string } = {
   primary: "bg-teal-700 hover:bg-teal-900",
-  secondary: "bg-transparent hover:bg-slate-900 px-2",
+  secondary: "bg-slate-700 hover:bg-slate-900",
+  tertiary: "bg-transparent hover:bg-slate-900",
 };
-export const baseStyles =
+const baseStyles =
   "text-xl py-2 px-6 transition-all duration-200 rounded disabled:bg-gray-500 disabled:cursor-not-allowed";
+const iconStyles = "px-2";
 
 export const Button: React.FC<Props> = ({
   children,
+  onClick,
+  disabled,
   palette = "primary",
+  icon,
+  as = "button",
   classNameOverride,
-  ...props
 }) => {
+  const Tag = as;
+
   return (
-    <button
-      className={tw(baseStyles, paletteStyles[palette], classNameOverride)}
-      {...props}
+    <Tag
+      className={tw(
+        baseStyles,
+        paletteStyles[palette],
+        icon && iconStyles,
+        classNameOverride
+      )}
+      onClick={onClick}
+      disabled={disabled}
     >
       {children}
-    </button>
+    </Tag>
   );
 };
