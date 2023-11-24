@@ -3,26 +3,27 @@ import { Game } from "~api";
 import { Modal } from "~app/components";
 import { GameDetails, GameImage } from "./components";
 
-const hidden = { opacity: 0, scale: 0 };
-const visible = {
-  opacity: 1,
-  scale: 1,
-  rotate: 360,
-};
-
-const motionItem = {
-  hidden,
-  visible,
-};
-
 type Props = {
   game?: Game;
+  enableSpinAnimation?: boolean;
 };
 
-export const GameCard: React.FC<Props> = ({ game }) => {
+export const GameCard: React.FC<Props> = ({ game, enableSpinAnimation }) => {
   if (!game) {
     return null;
   }
+
+  const hidden = { opacity: 0, scale: 0 };
+  const visible = {
+    opacity: 1,
+    scale: 1,
+    ...(enableSpinAnimation ? { rotate: 360 } : {}),
+  };
+
+  const motionItem = {
+    hidden,
+    visible,
+  };
 
   return (
     <Modal

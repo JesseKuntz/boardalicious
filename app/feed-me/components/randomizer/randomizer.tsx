@@ -32,7 +32,7 @@ export const Randomizer: React.FC<Props> = ({ collection }) => {
         <Button onClick={chooseRandomGame}>FEED ME 🍝</Button>
       </div>
       <div>
-        <GameCard game={chosenGame} />
+        <GameCard game={chosenGame} enableSpinAnimation />
       </div>
     </div>
   );
