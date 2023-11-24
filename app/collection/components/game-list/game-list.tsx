@@ -75,7 +75,7 @@ export const GameList: React.FC<Props> = ({ collection }) => {
         </Button>
         <input
           ref={inputRef}
-          placeholder="Search your collection"
+          placeholder={showSearch ? "Search your collection" : ""}
           className={tw(
             "w-full sm:w-0 h-0 sm:h-[52px] px-4 sm:px-0 border-0 flex-grow-1 rounded placeholder-slate-400 bg-slate-800  border-slate-700 transition-all duration-200",
             showSearch && "sm:w-80 h-[52px] sm:px-4 border-2"
