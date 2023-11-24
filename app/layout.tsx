@@ -21,7 +21,7 @@ export default function RootLayout({
         className={`${robotoMono.className} bg-gray-800 bg-[url('/wavey-fingerprint.svg')] text-white text-lg`}
       >
         <Menu />
-        <main className="px-4 md:px-12 py-12 ">
+        <main className="px-4 md:px-12 py-8 md:py-12 ">
           <Providers>{children}</Providers>
         </main>
       </body>

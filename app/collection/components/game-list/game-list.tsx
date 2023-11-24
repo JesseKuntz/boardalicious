@@ -60,7 +60,7 @@ export const GameList: React.FC<Props> = ({ collection }) => {
   }
 
   return (
-    <div className="pt-8 w-full">
+    <div className="pt-4 w-full">
       <div className="flex gap-4 flex-wrap">
         <ToggleGroup<SortingValue>
           value={sortingValue}
