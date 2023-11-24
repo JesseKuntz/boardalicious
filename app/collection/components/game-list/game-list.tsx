@@ -1,6 +1,6 @@
 import { useCallback, useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiX } from "react-icons/fi";
 import { useToggle } from "usehooks-ts";
 import { twMerge as tw } from "tailwind-merge";
 import { Game } from "~api";
@@ -70,19 +70,43 @@ export const GameList: React.FC<Props> = ({ collection }) => {
             { content: "Year", value: SortingValue.YEAR },
           ]}
         />
-        <Button palette="secondary" onClick={() => toggleShowSearch()}>
+        <Button
+          palette="secondary"
+          onClick={() => {
+            setSearchValue("");
+            toggleShowSearch();
+          }}
+        >
           <FiSearch />
         </Button>
-        <input
-          ref={inputRef}
-          placeholder={showSearch ? "Search your collection" : ""}
+        <div
           className={tw(
-            "w-full sm:w-0 h-0 sm:h-[52px] px-4 sm:px-0 border-0 flex-grow-1 rounded placeholder-slate-400 bg-slate-800  border-slate-700 transition-all duration-200",
-            showSearch && "sm:w-80 h-[52px] sm:px-4 border-2"
+            "relative w-full sm:w-0 h-0 sm:h-[52px] flex-grow-1 transition-all duration-200",
+            showSearch && "sm:w-80 h-[52px]"
           )}
-          onChange={(event) => setSearchValue(event.target.value)}
-          value={searchValue}
-        />
+        >
+          <input
+            ref={inputRef}
+            placeholder={showSearch ? "Search your collection" : ""}
+            className={tw(
+              "w-full h-full px-4 sm:px-0 border-0 flex-grow-1 rounded placeholder-slate-400 bg-slate-800  border-slate-700 transition-all duration-200",
+              showSearch && "sm:px-4 border-2"
+            )}
+            onChange={(event) => setSearchValue(event.target.value)}
+            value={searchValue}
+          />
+          {searchValue && (
+            <div className="absolute right-2 top-[50%] -translate-y-[50%]">
+              <Button
+                palette="tertiary"
+                onClick={() => setSearchValue("")}
+                icon
+              >
+                <FiX />
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
       <motion.ul
         variants={motionContainer}
