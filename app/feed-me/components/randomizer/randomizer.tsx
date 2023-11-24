@@ -23,11 +23,18 @@ export const Randomizer: React.FC<Props> = ({ collection }) => {
     setChosenGame(randomGame);
   };
 
+  const numberOfGames = Number(collection.length).toLocaleString();
+
   return (
     <div className="pt-4 space-y-12 flex flex-col items-center text-center">
-      <h2>{`We'll pick from your collection of ${Number(
-        collection.length
-      ).toLocaleString()} games.`}</h2>
+      <h2 className="text-xl">
+        We&apos;ll pick from your collection of{" "}
+        <span className="rounded px-1 font-bold text-2xl bg-gradient-to-r from-rose-400 to-violet-700">
+          {numberOfGames}
+        </span>{" "}
+        games.
+      </h2>
+
       <div>
         <Button onClick={chooseRandomGame}>FEED ME 🍝</Button>
       </div>
