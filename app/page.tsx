@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
-import { routes } from "~utils";
+import { useSearchParams } from "next/navigation";
+import { routes, getHrefWithParams } from "~utils";
 import { Button, Logo } from "./components";
 
 const HomePage = () => {
+  const searchParams = useSearchParams();
+
   return (
     <div className="text-center space-y-12 max-w-4xl m-auto">
       <h1 className="text-4xl font-semibold">
@@ -17,7 +22,7 @@ const HomePage = () => {
         }
       </p>
       <div>
-        <Link href={routes.feedMe} passHref>
+        <Link href={getHrefWithParams(routes.feedMe, searchParams)} passHref>
           <Button>{"Let's Play!"}</Button>
         </Link>
       </div>

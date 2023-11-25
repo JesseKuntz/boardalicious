@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { FiXSquare, FiRefreshCcw } from "react-icons/fi";
-import { useLocalStorage } from "usehooks-ts";
-import { USERNAME_STORAGE_KEY } from "~utils";
+import { useUsername } from "~app/hooks";
 import { Button } from "..";
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 };
 
 export const Username: React.FC<Props> = ({ refetch }) => {
-  const [username, setUsername] = useLocalStorage(USERNAME_STORAGE_KEY, "");
+  const { username, updateUsername } = useUsername();
   const [refetchButtonClicked, setRefetchButtonClicked] = useState(false);
 
   if (!username) {
@@ -25,7 +24,7 @@ export const Username: React.FC<Props> = ({ refetch }) => {
         <div className="flex gap-2">
           <span className="flex items-center gap-2 rounded bg-slate-700 pl-4 pr-1 py-1">
             {username}
-            <Button palette="tertiary" onClick={() => setUsername("")} icon>
+            <Button palette="tertiary" onClick={() => updateUsername("")} icon>
               <FiXSquare />
             </Button>
           </span>

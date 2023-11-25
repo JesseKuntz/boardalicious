@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { routes } from "~utils";
+import { useSearchParams } from "next/navigation";
+import { routes, getHrefWithParams } from "~utils";
 import { Button } from "..";
 
 const menuItems = [
@@ -22,6 +23,7 @@ const menuItems = [
 
 export const Menu: React.FC = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const searchParams = useSearchParams();
 
   const handleNavToggle = () => {
     setIsNavOpen(!isNavOpen);
@@ -31,7 +33,7 @@ export const Menu: React.FC = () => {
     <nav className="backdrop-blur-md border-b border-b-gray-700 sticky top-0 py-6 z-10">
       <div className="flex items-center justify-between px-4 md:px-12">
         <div className="flex items-center" onClick={() => setIsNavOpen(false)}>
-          <Link href="/">
+          <Link href={getHrefWithParams(routes.home, searchParams)}>
             <span className="text-2xl font-semibold text-white">
               Boardalicious
             </span>
@@ -41,7 +43,7 @@ export const Menu: React.FC = () => {
           <ul className="flex divide-x-2">
             {menuItems.map(({ title, href }) => (
               <li key={title} className="px-4 first:pl-0 last:pr-0">
-                <Link href={href}>
+                <Link href={getHrefWithParams(href, searchParams)}>
                   <span className="text-white hover:text-gray-200">
                     {title}
                   </span>
@@ -97,7 +99,7 @@ export const Menu: React.FC = () => {
           <ul className="mt-2 px-2">
             {menuItems.map(({ title, href }) => (
               <li key={title} onClick={() => setIsNavOpen(false)}>
-                <Link href={href}>
+                <Link href={getHrefWithParams(href, searchParams)}>
                   <Button
                     palette="tertiary"
                     classNameOverride="block w-full text-left"

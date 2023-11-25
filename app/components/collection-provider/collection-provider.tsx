@@ -2,18 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useLocalStorage } from "usehooks-ts";
 import { FiInfo } from "react-icons/fi";
 import { getCollection, Game } from "~api";
-import { USERNAME_STORAGE_KEY } from "~utils";
 import { Button, Username, Logo, Tooltip } from "~app/components";
+import { useUsername } from "~app/hooks";
 
 type Props = {
   children: JSX.Element;
 };
 
 export const CollectionProvider: React.FC<Props> = ({ children }) => {
-  const [username, setUsername] = useLocalStorage(USERNAME_STORAGE_KEY, "");
+  const { username, updateUsername } = useUsername();
   const [usernameInputValue, setUsernameInputValue] = useState("");
   const {
     data: collection,
@@ -38,7 +37,7 @@ export const CollectionProvider: React.FC<Props> = ({ children }) => {
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setUsername(usernameInputValue);
+    updateUsername(usernameInputValue);
   };
 
   const renderChildren = () =>
