@@ -47,3 +47,5 @@ export const ToastViewport: React.FC = () => {
     <ToastPrimitive.ToastViewport className="fixed bottom-0 right-0 flex p-2 flex-col gap-2" />
   );
 };
+
+Toast.displayName = "Toast";
