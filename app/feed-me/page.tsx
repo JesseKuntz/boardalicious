@@ -1,11 +1,18 @@
-import { CollectionProvider } from "~app/components";
+import {
+  CollectionProvider,
+  ToastProvider,
+  ToastViewport,
+} from "~app/components";
 import { Randomizer } from "./components";
 
 const FeedMePage = () => {
   return (
-    <CollectionProvider>
-      <Randomizer />
-    </CollectionProvider>
+    <ToastProvider>
+      <CollectionProvider>
+        <Randomizer />
+      </CollectionProvider>
+      <ToastViewport />
+    </ToastProvider>
   );
 };
 
