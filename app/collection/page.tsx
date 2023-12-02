@@ -1,13 +1,20 @@
 "use client";
 
-import { CollectionProvider } from "~app/components";
+import {
+  CollectionProvider,
+  ToastProvider,
+  ToastViewport,
+} from "~app/components";
 import { GameList } from "./components";
 
 const CollectionPage: React.FC = () => {
   return (
-    <CollectionProvider>
-      <GameList />
-    </CollectionProvider>
+    <ToastProvider>
+      <CollectionProvider>
+        <GameList />
+      </CollectionProvider>
+      <ToastViewport />
+    </ToastProvider>
   );
 };
 

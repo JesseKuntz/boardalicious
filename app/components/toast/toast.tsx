@@ -44,6 +44,6 @@ export const Toast = React.forwardRef<ToastHandle, Props>(
 
 export const ToastViewport: React.FC = () => {
   return (
-    <ToastPrimitive.ToastViewport className="fixed bottom-0 right-0 flex p-4 flex-col gap-4" />
+    <ToastPrimitive.ToastViewport className="fixed bottom-0 right-0 flex p-2 flex-col gap-2" />
   );
 };
