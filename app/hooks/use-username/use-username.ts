@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { createQueryString } from "~utils/routes";
 
 export const USERNAME_KEY = "username";
 
@@ -9,21 +10,6 @@ export const useUsername = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-
-      if (!value) {
-        params.delete(name);
-      } else {
-        params.set(name, value);
-      }
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
   useEffect(() => {
     const searchParamsUsername = searchParams.get(USERNAME_KEY);
 
@@ -31,7 +17,14 @@ export const useUsername = () => {
   }, [searchParams]);
 
   const updateUsername = (newUsername: string) => {
-    router.push(`${pathname}?${createQueryString(USERNAME_KEY, newUsername)}`);
+    router.push(
+      `${pathname}?${createQueryString({
+        key: USERNAME_KEY,
+        value: newUsername,
+        searchParams,
+      })}`,
+      { scroll: false }
+    );
   };
 
   return {

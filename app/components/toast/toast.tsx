@@ -22,7 +22,7 @@ export const Toast = React.forwardRef<ToastHandle, Props>(
     }));
 
     return (
-      <div className="flex flex-col gap-4">
+      <>
         {Array.from({ length: count }).map((_, index) => (
           <ToastPrimitive.Root
             className={tw(
@@ -37,14 +37,14 @@ export const Toast = React.forwardRef<ToastHandle, Props>(
             <ToastPrimitive.Description>{children}</ToastPrimitive.Description>
           </ToastPrimitive.Root>
         ))}
-      </div>
+      </>
     );
   }
 );
 
 export const ToastViewport: React.FC = () => {
   return (
-    <ToastPrimitive.ToastViewport className="fixed bottom-0 right-0 flex p-2 flex-col gap-2" />
+    <ToastPrimitive.ToastViewport className="fixed bottom-0 right-0 flex p-2 flex-col gap-2 z-30" />
   );
 };
 

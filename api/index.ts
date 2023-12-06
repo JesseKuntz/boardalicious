@@ -20,6 +20,8 @@ export type Game = {
 };
 
 export type GameDetails = {
+  name: ValueField[] | ValueField;
+  image: TextField;
   attributes: {
     id: string;
   };

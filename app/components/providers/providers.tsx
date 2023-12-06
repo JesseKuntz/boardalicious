@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import {
+  GameDetailsModal,
+  ToastProvider,
+  ToastViewport,
+} from "~app/components";
 
 type Props = {
   children: React.ReactNode;
@@ -14,6 +19,12 @@ export const Providers: React.FC<Props> = ({ children }) => {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ToastProvider>
+        {children}
+        <GameDetailsModal />
+        <ToastViewport />
+      </ToastProvider>
+    </QueryClientProvider>
   );
 };

@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { twMerge as tw } from "tailwind-merge";
-import { Game } from "~api";
 
 type Size = "sm" | "lg";
 
 type Props = {
-  game: Game;
+  src: string;
+  alt: string;
   size?: Size;
 };
 
-export const GameImage: React.FC<Props> = ({ game, size = "sm" }) => {
+export const GameImage: React.FC<Props> = ({ src, alt, size = "sm" }) => {
   const sizeMap: { [key in Size]: string } = {
     sm: "w-24",
     lg: "w-48",
@@ -17,8 +17,8 @@ export const GameImage: React.FC<Props> = ({ game, size = "sm" }) => {
 
   return (
     <Image
-      src={game.image.text}
-      alt={game.name.text}
+      src={src}
+      alt={alt}
       className={tw("border border-slate-500 rounded", sizeMap[size])}
       width={96}
       height={96}

@@ -1,14 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
-import {
-  FiXSquare,
-  FiRefreshCcw,
-  FiShare,
-  FiCheckSquare,
-} from "react-icons/fi";
+import { useState } from "react";
+import { FiXSquare, FiRefreshCcw } from "react-icons/fi";
 import { useUsername } from "~app/hooks";
-import { Button, Toast, ToastHandle } from "..";
+import { Button, CopyURLButton } from "..";
 
 type Props = {
   refetch: () => void;
@@ -17,7 +12,6 @@ type Props = {
 export const Username: React.FC<Props> = ({ refetch }) => {
   const { username, updateUsername } = useUsername();
   const [refetchButtonClicked, setRefetchButtonClicked] = useState(false);
-  const toastRef = useRef<ToastHandle>(null);
 
   if (!username) {
     return null;
@@ -56,26 +50,9 @@ export const Username: React.FC<Props> = ({ refetch }) => {
           </Button>
         </div>
         <div className="flex items-center">
-          <Button
-            palette="tertiary"
-            onClick={async () => {
-              try {
-                await navigator.clipboard.writeText(window.location.href);
-                toastRef?.current?.publish();
-              } catch (e) {}
-            }}
-            icon
-          >
-            <FiShare />
-          </Button>
+          <CopyURLButton />
         </div>
       </div>
-      <Toast ref={toastRef}>
-        <div className="flex items-center gap-4">
-          <FiCheckSquare />
-          URL Copied
-        </div>
-      </Toast>
     </>
   );
 };
