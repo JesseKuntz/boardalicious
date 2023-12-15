@@ -26,7 +26,7 @@ export const Toast = React.forwardRef<ToastHandle, Props>(
         {Array.from({ length: count }).map((_, index) => (
           <ToastPrimitive.Root
             className={tw(
-              "backdrop-blur-md border border-gray-700 p-4 rounded",
+              "backdrop-blur-2xl border border-gray-700 p-4 rounded",
               "data-[state=open]:animate-[slideIn_150ms_cubic-bezier(0.16,1,0.3,1)]",
               "data-[state=closed]:animate-[hide_100ms_ease-in]"
             )}
