@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { FiXSquare, FiRefreshCcw, FiMoreVertical } from "react-icons/fi";
+import { useRef } from "react";
+import {
+  FiShare,
+  FiXSquare,
+  FiRefreshCcw,
+  FiMoreVertical,
+} from "react-icons/fi";
 import { useUsername } from "~app/hooks";
-import { Button, CopyURLButton, Dropdown } from "..";
+import { Button, Dropdown, ToastHandle, CopyToast, onCopyClick } from "..";
 
 type Props = {
   refetch: () => void;
@@ -11,7 +16,7 @@ type Props = {
 
 export const Username: React.FC<Props> = ({ refetch }) => {
   const { username, updateUsername } = useUsername();
-  const [refetchButtonClicked, setRefetchButtonClicked] = useState(false);
+  const toastRef = useRef<ToastHandle>(null);
 
   if (!username) {
     return null;
@@ -33,13 +38,14 @@ export const Username: React.FC<Props> = ({ refetch }) => {
                 }
                 items={[
                   {
+                    label: "Share",
+                    icon: <FiShare />,
+                    onClick: () => onCopyClick(toastRef),
+                  },
+                  {
                     label: "Refresh",
                     icon: <FiRefreshCcw />,
-                    onClick: () => {
-                      refetch();
-                      setRefetchButtonClicked(true);
-                      setTimeout(() => setRefetchButtonClicked(false), 5000);
-                    },
+                    onClick: refetch,
                   },
                   {
                     label: "Reset",
@@ -51,10 +57,8 @@ export const Username: React.FC<Props> = ({ refetch }) => {
             </span>
           </div>
         </h1>
-        <div className="flex items-center">
-          <CopyURLButton />
-        </div>
       </div>
+      <CopyToast toastRef={toastRef} />
     </>
   );
 };
