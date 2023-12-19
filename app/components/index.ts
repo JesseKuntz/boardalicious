@@ -4,6 +4,7 @@ export { Button } from "./button";
 export { CollectionProvider } from "./collection-provider";
 export { CopyURLButton, CopyToast, onCopyClick } from "./copy-url-button";
 export { Dropdown } from "./dropdown";
+export { FadeIn } from "./fade-in";
 export { GameDetailsModal } from "./game-details-modal";
 export { Logo } from "./logo";
 export { Menu } from "./menu";
