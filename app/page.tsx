@@ -27,6 +27,16 @@ const HomePage = () => {
             <Button>{"Let's Play!"}</Button>
           </Link>
         </div>
+        <div className="flex justify-center">
+          Made with 🤍 by
+          <a
+            href="https://jessekuntz.github.io/"
+            target="_blank"
+            className="ml-2 mt-auto underline hover:no-underline"
+          >
+            Jesse Kuntz
+          </a>
+        </div>
       </div>
     </FadeIn>
   );
