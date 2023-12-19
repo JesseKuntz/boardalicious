@@ -4,8 +4,16 @@ import { Button, Toast, ToastHandle } from "..";
 
 export const onCopyClick = async (toastRef: RefObject<ToastHandle>) => {
   try {
-    await navigator.clipboard.writeText(window.location.href);
-    toastRef?.current?.publish();
+    // @ts-ignore
+    if (navigator.share) {
+      await navigator.share({
+        url: window.location.href,
+        title: window.document.title,
+      });
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      toastRef?.current?.publish();
+    }
   } catch (e) {}
 };
 

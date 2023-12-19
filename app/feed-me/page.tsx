@@ -1,18 +1,15 @@
-import {
-  CollectionProvider,
-  ToastProvider,
-  ToastViewport,
-} from "~app/components";
+import { CollectionProvider } from "~app/components";
 import { Randomizer } from "./components";
+
+export const metadata = {
+  title: "Feed Me | Boardalicious",
+};
 
 const FeedMePage = () => {
   return (
-    <ToastProvider>
-      <CollectionProvider>
-        <Randomizer />
-      </CollectionProvider>
-      <ToastViewport />
-    </ToastProvider>
+    <CollectionProvider>
+      <Randomizer />
+    </CollectionProvider>
   );
 };
 

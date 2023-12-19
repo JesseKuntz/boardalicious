@@ -1,20 +1,15 @@
-"use client";
-
-import {
-  CollectionProvider,
-  ToastProvider,
-  ToastViewport,
-} from "~app/components";
+import { CollectionProvider } from "~app/components";
 import { GameList } from "./components";
+
+export const metadata = {
+  title: "Collection | Boardalicious",
+};
 
 const CollectionPage: React.FC = () => {
   return (
-    <ToastProvider>
-      <CollectionProvider>
-        <GameList />
-      </CollectionProvider>
-      <ToastViewport />
-    </ToastProvider>
+    <CollectionProvider>
+      <GameList />
+    </CollectionProvider>
   );
 };
 

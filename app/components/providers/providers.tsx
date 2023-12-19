@@ -21,9 +21,9 @@ export const Providers: React.FC<Props> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
-        {children}
         <GameDetailsModal />
         <ToastViewport />
+        {children}
       </ToastProvider>
     </QueryClientProvider>
   );
