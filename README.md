@@ -7,7 +7,7 @@
   Boardalicious
 </h1>
 
-### [👉 Full Project Description 👈](https://jessekuntz.github.io/?project=boardalicious)
+### [👉 Full Project Description 👈](https://jessekuntz.github.io/boardalicious.html)
 
 ## Running Things
 
